@@ -2,12 +2,16 @@ from Queue import Queue
 
 
 class MsgQueue(Queue):
-    STOP = object
+    STOP = object()
+
+    def __init__(self, max):
+        #super(MsgQueue, self).__init__(maxsize=max)
+        Queue.__init__(self, maxsize=max)
 
     def stop(self):
         self.put(self.STOP)
 
-    def __iter__self(self):
+    def __iter__(self):
         while True:
             msg = self.get()
             try:
